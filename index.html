@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ru" class="h-full w-full overflow-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лариса Александровна Воскобоева — Врач, Нутрициолог, Гирудотерапевт</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#121316',
+                        espresso: '#1C1B1A',
+                        terracotta: '#C84B31',
+                        'terracotta-dark': '#A63B24',
+                        amber: '#E09F5A',
+                        cream: '#FAF7F2',
+                        alabaster: '#EFECE6',
+                        sage: '#1E332A',
+                        'sage-dark': '#13221B',
+                        'sage-pill': '#96AA9D'
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* 3D Stage & Depth Layers */
+        .viewport-3d {
+            perspective: 1000px;
+            perspective-origin: 50% 50%;
+        }
+        
+        .layer-stage {
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .portal-layer {
+            backface-visibility: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease, filter 0.8s ease;
+            will-change: transform, opacity, filter;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(28, 27, 26, 0.78);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        
+        .glass-card-light {
+            background: rgba(250, 247, 242, 0.96);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(30, 51, 42, 0.15);
+        }
+
+        /* Ambient Glow & Radial Vignette */
+        .vignette-overlay {
+            background: radial-gradient(circle at center, transparent 35%, rgba(18, 19, 22, 0.88) 90%);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121316;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body class="bg-obsidian text-cream font-sans h-full w-full overflow-hidden select-none">
+
+    <!-- TOP HEADER BAR (1:1 MATCH TO REFERENCE DESIGN) -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#EFECE6] h-16 flex items-center justify-between md:justify-center px-6 shadow-sm border-b border-stone-300/40">
+        <!-- Mobile Brand Label -->
+        <a href="#" onclick="goToLayer(0); return false;" class="md:hidden font-sans font-semibold text-[#1E332A] text-base tracking-wide">
+            Л. А. Воскобоева
+        </a>
+
+        <!-- Centered Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-8 lg:space-x-12 text-sm sm:text-[15px] font-normal text-[#1E332A]">
+            <button onclick="goToLayer(0)" id="nav-btn-0" class="nav-item relative py-2 font-medium text-[#1E332A]">
+                Обо мне
+                <span id="nav-indicator-0" class="nav-indicator absolute bottom-0 left-0 w-full h-[2px] bg-[#1E332A] transition-all duration-300"></span>
+            </button>
+            <button onclick="goToLayer(1)" id="nav-btn-1" class="nav-item relative py-2 hover:opacity-75 transition-opacity">
+                Нутрициология
+                <span id="nav-indicator-1" class="nav-indicator absolute bottom-0 left-0 w-0 h-[2px] bg-[#1E332A] transition-all duration-300"></span>
+            </button>
+            <button onclick="goToLayer(2)" id="nav-btn-2" class="nav-item relative py-2 hover:opacity-75 transition-opacity">
+                Гирудотерапия
+                <span id="nav-indicator-2" class="nav-indicator absolute bottom-0 left-0 w-0 h-[2px] bg-[#1E332A] transition-all duration-300"></span>
+            </button>
+            <button onclick="goToLayer(3)" id="nav-btn-3" class="nav-item relative py-2 hover:opacity-75 transition-opacity">
+                Программы
+                <span id="nav-indicator-3" class="nav-indicator absolute bottom-0 left-0 w-0 h-[2px] bg-[#1E332A] transition-all duration-300"></span>
+            </button>
+            <button onclick="goToLayer(4)" id="nav-btn-4" class="nav-item relative py-2 hover:opacity-75 transition-opacity">
+                Контакты
+                <span id="nav-indicator-4" class="nav-indicator absolute bottom-0 left-0 w-0 h-[2px] bg-[#1E332A] transition-all duration-300"></span>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu Icon Button -->
+        <button onclick="toggleMobileMenu()" class="md:hidden text-[#1E332A] text-xl p-2 focus:outline-none">
+            <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
+        </button>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden absolute top-16 left-0 right-0 bg-[#EFECE6] border-b border-stone-300 p-4 flex flex-col space-y-3 font-medium text-[#1E332A] shadow-lg">
+            <button onclick="goToLayer(0); toggleMobileMenu();" class="text-left py-2 hover:opacity-75">Обо мне</button>
+            <button onclick="goToLayer(1); toggleMobileMenu();" class="text-left py-2 hover:opacity-75">Нутрициология</button>
+            <button onclick="goToLayer(2); toggleMobileMenu();" class="text-left py-2 hover:opacity-75">Гирудотерапия</button>
+            <button onclick="goToLayer(3); toggleMobileMenu();" class="text-left py-2 hover:opacity-75">Программы</button>
+            <button onclick="goToLayer(4); toggleMobileMenu();" class="text-left py-2 hover:opacity-75">Контакты</button>
+            <button onclick="openBookingModal(); toggleMobileMenu();" class="bg-[#1E332A] text-white text-center py-2.5 rounded-sm text-sm mt-2">Записаться на консультацию</button>
+        </div>
+    </header>
+
+    <!-- RIGHT-SIDE Z-AXIS DEPTH INDICATOR -->
+    <div class="hidden sm:flex fixed right-6 md:right-10 top-1/2 -translate-y-1/2 z-40 flex-col items-center space-y-4">
+        <div class="flex flex-col items-center space-y-3">
+            <button onclick="goToLayer(0)" id="dot-0" class="dot-nav group flex items-center gap-3 focus:outline-none">
+                <span class="text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity text-amber">01</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber ring-4 ring-amber/20 transition-all duration-300"></span>
+            </button>
+            <button onclick="goToLayer(1)" id="dot-1" class="dot-nav group flex items-center gap-3 focus:outline-none">
+                <span class="text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity text-stone-400">02</span>
+                <span class="w-2 h-2 rounded-full bg-stone-600 transition-all duration-300"></span>
+            </button>
+            <button onclick="goToLayer(2)" id="dot-2" class="dot-nav group flex items-center gap-3 focus:outline-none">
+                <span class="text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity text-stone-400">03</span>
+                <span class="w-2 h-2 rounded-full bg-stone-600 transition-all duration-300"></span>
+            </button>
+            <button onclick="goToLayer(3)" id="dot-3" class="dot-nav group flex items-center gap-3 focus:outline-none">
+                <span class="text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity text-stone-400">04</span>
+                <span class="w-2 h-2 rounded-full bg-stone-600 transition-all duration-300"></span>
+            </button>
+            <button onclick="goToLayer(4)" id="dot-4" class="dot-nav group flex items-center gap-3 focus:outline-none">
+                <span class="text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity text-stone-400">05</span>
+                <span class="w-2 h-2 rounded-full bg-stone-600 transition-all duration-300"></span>
+            </button>
+        </div>
+        <div class="h-12 w-[1px] bg-stone-700/60 my-2"></div>
+        <span id="layer-counter" class="text-xs font-mono text-amber tracking-wider font-semibold">01/05</span>
+    </div>
+
+    <!-- MAIN 3D PORTAL VIEWPORT -->
+    <main class="w-full h-full viewport-3d relative">
+        <div id="stage" class="layer-stage w-full h-full relative">
+
+            <!-- LAYER 0: HERO SCREEN (EXACT 1:1 MATCH TO APPROVED IMAGE) -->
+            <section id="layer-0" class="portal-layer absolute inset-0 w-full h-full pt-16 flex flex-col justify-end overflow-hidden bg-[#D8D3C8] z-30" style="transform: translateZ(0px); opacity: 1;">
+                
+                <!-- Main Background Photo with Local + High-Res Fallback -->
+                <img src="image.jpg"
+                     onerror="this.onerror=null;
+                     alt="Лариса Александровна Воскобоева" 
+                     class="absolute inset-0 w-full h-full object-cover object-[center_18%] z-0">
+
+                <!-- Emerald-Sage Bottom Gradient Overlay -->
+                <div class="absolute inset-0 z-10 pointer-events-none" 
+                     style="background: linear-gradient(to top, #243A30 0%, rgba(36, 58, 48, 0.92) 32%, rgba(36, 58, 48, 0.35) 55%, rgba(36, 58, 48, 0) 75%);">
+                </div>
+
+                <!-- Left Bottom Typography & Interactive Controls -->
+                <div class="relative z-20 max-w-6xl mx-auto w-full px-6 sm:px-12 pb-20 sm:pb-14">
+                    <!-- Headline -->
+                    <h1 class="font-sans font-light uppercase text-white tracking-[0.02em] leading-[1.08] text-3xl sm:text-4xl md:text-5xl lg:text-[56px] mb-4 sm:mb-5">
+                        <span class="block">ЛАРИСА</span>
+                        <span class="block">АЛЕКСАНДРОВНА</span>
+                        <span class="block">ВОСКОБОЕВА</span>
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <p class="font-sans font-light text-white/95 text-base sm:text-xl md:text-[22px] leading-[1.35] max-w-xl mb-6">
+                        Научный и холистический подход<br>
+                        к здоровью, весу и восстановлению<br>
+                        ресурса
+                    </p>
+
+                    <!-- Credentials Line -->
+                    <p class="font-sans font-normal text-white/85 text-xs sm:text-sm tracking-wide mb-9">
+                        Медицинское образование • Нутрициология • Гирудотерапия
+                    </p>
+
+                    <!-- Light Alabaster CTA Button -->
+                    <div>
+                        <button onclick="openBookingModal()" 
+                                class="bg-[#EFECE6] hover:bg-white text-[#1E332A] font-sans font-normal text-sm sm:text-[15px] px-7 py-4 rounded-[4px] inline-flex items-center gap-4 shadow-md transition-all group">
+                            <span>Записаться на консультацию</span>
+                            <span class="text-lg leading-none transition-transform group-hover:translate-x-1">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Center Bottom Vertical Sage Tab (Flush with Edge) -->
+                <button onclick="goToLayer(1)" 
+                        class="hidden sm:flex absolute bottom-0 left-1/2 -translate-x-1/2 z-30 bg-[#96AA9D] hover:bg-[#859B8D] text-[#1E332A] w-12 h-32 lg:h-36 rounded-t-full items-center justify-center shadow-lg transition-colors cursor-pointer group">
+                    <span class="font-sans text-xs tracking-wider whitespace-nowrap -rotate-90 flex items-center gap-2">
+                        <span class="text-white text-sm transition-transform group-hover:-translate-x-1">←</span> Узнать больше
+                    </span>
+                </button>
+            </section>
+
+            <!-- LAYER 1: NUTRITIOLOGY & METABOLISM -->
+            <section id="layer-1" class="portal-layer absolute inset-0 w-full h-full flex flex-col justify-start sm:justify-center items-center pt-24 sm:pt-20 pb-14 px-4 sm:px-12 md:px-16 z-20 opacity-0 pointer-events-none" style="transform: translateZ(-600px);">
+                <div class="absolute inset-0 -z-10 bg-obsidian">
+                    <img src="layer-2-nutrition.jpg" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=2000&q=80';" 
+                         alt="Нутрициология и Питание" 
+                         class="w-full h-full object-cover filter brightness-[0.35] contrast-[1.1]">
+                    <div class="absolute inset-0 vignette-overlay"></div>
+                </div>
+
+                <div class="max-w-6xl w-full mx-auto space-y-5 sm:space-y-8">
+                    <div class="text-center space-y-3">
+                        <span class="text-amber text-xs uppercase tracking-[0.3em] font-semibold">Раздел 02</span>
+                        <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl text-cream font-light">
+                            Клиническая Нутрициология & Метаболизм
+                        </h2>
+                        <p class="text-stone-300 max-w-2xl mx-auto text-sm sm:text-base font-light">
+                            Персонализированная коррекция биохимии организма, устранение дефицитов и нормализация пищеварения
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="glass-card p-5 sm:p-6 md:p-8 rounded-xl space-y-2.5 sm:space-y-4 border border-amber/20 hover:border-amber/50 transition-colors">
+                            <div class="w-12 h-12 rounded-lg bg-amber/10 flex items-center justify-center text-amber text-xl">
+                                <i class="fa-solid fa-dna"></i>
+                            </div>
+                            <h3 class="font-serif text-2xl text-cream">Анализ Биохимии</h3>
+                            <p class="text-stone-300 text-sm leading-relaxed">
+                                Глубокая расшифровка лабораторных анализов крови, ферментов и микроэлементов для индивидуальной терапии.
+                            </p>
+                        </div>
+
+                        <div class="glass-card p-5 sm:p-6 md:p-8 rounded-xl space-y-2.5 sm:space-y-4 border border-amber/20 hover:border-amber/50 transition-colors">
+                            <div class="w-12 h-12 rounded-lg bg-terracotta/10 flex items-center justify-center text-terracotta text-xl">
+                                <i class="fa-solid fa-wheat-awn"></i>
+                            </div>
+                            <h3 class="font-serif text-2xl text-cream">Индивидуальный Рацион</h3>
+                            <p class="text-stone-300 text-sm leading-relaxed">
+                                Составление физиологически сбалансированного меню без изнуряющих ограничений и жестких диет.
+                            </p>
+                        </div>
+
+                        <div class="glass-card p-5 sm:p-6 md:p-8 rounded-xl space-y-2.5 sm:space-y-4 border border-amber/20 hover:border-amber/50 transition-colors">
+                            <div class="w-12 h-12 rounded-lg bg-amber/10 flex items-center justify-center text-amber text-xl">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <h3 class="font-serif text-2xl text-cream">Энергия и Легкость</h3>
+                            <p class="text-stone-300 text-sm leading-relaxed">
+                                Восстановление работы ЖКТ, нормализация веса и устранение хронической усталости.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center pt-4">
+                        <button onclick="goToLayer(2)" class="text-amber hover:text-white font-medium text-sm tracking-widest uppercase flex items-center gap-3 transition-colors">
+                            <span>Перейти к гирудотерапии</span>
+                            <i class="fa-solid fa-arrow-down text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LAYER 2: HIRUDOTHERAPY -->
+            <section id="layer-2" class="portal-layer absolute inset-0 w-full h-full flex flex-col justify-start sm:justify-center items-center pt-24 sm:pt-20 pb-14 px-4 sm:px-12 md:px-16 z-10 opacity-0 pointer-events-none" style="transform: translateZ(-1200px);">
+                <div class="absolute inset-0 -z-10 bg-obsidian">
+                    <img src="layer-3-hirudo.jpg" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=2000&q=80';" 
+                         alt="Медицинская Гирудотерапия" 
+                         class="w-full h-full object-cover filter brightness-[0.35] contrast-[1.15]">
+                    <div class="absolute inset-0 vignette-overlay"></div>
+                </div>
+
+                <div class="max-w-6xl w-full mx-auto space-y-5 sm:space-y-8">
+                    <div class="text-center space-y-3">
+                        <span class="text-terracotta text-xs uppercase tracking-[0.3em] font-semibold">Раздел 03</span>
+                        <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl text-cream font-light">
+                            Медицинская Гирудотерапия
+                        </h2>
+                        <p class="text-stone-300 max-w-2xl mx-auto text-sm sm:text-base font-light">
+                            Природное очищение сосудистого русла, снятие застойных явлений и активация лимфодренажа
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                        <div class="glass-card p-6 rounded-xl space-y-3 relative overflow-hidden">
+                            <span class="text-4xl font-serif font-bold text-terracotta/30 absolute top-4 right-4">01</span>
+                            <h3 class="font-serif text-xl text-cream font-medium">Микроциркуляция</h3>
+                            <p class="text-stone-300 text-xs leading-relaxed">
+                                Фермент гирудин улучшает текучесть крови и устраняет микротромбозы в органах.
+                            </p>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-xl space-y-3 relative overflow-hidden">
+                            <span class="text-4xl font-serif font-bold text-terracotta/30 absolute top-4 right-4">02</span>
+                            <h3 class="font-serif text-xl text-cream font-medium">Снятие Отечности</h3>
+                            <p class="text-stone-300 text-xs leading-relaxed">
+                                Мощный лимфодренажный эффект и снижение воспалительных процессов в тканях.
+                            </p>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-xl space-y-3 relative overflow-hidden">
+                            <span class="text-4xl font-serif font-bold text-terracotta/30 absolute top-4 right-4">03</span>
+                            <h3 class="font-serif text-xl text-cream font-medium">Нормализация Давления</h3>
+                            <p class="text-stone-300 text-xs leading-relaxed">
+                                Мягкое разгрузочное действие на артериальную и венозную систему.
+                            </p>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-xl space-y-3 relative overflow-hidden">
+                            <span class="text-4xl font-serif font-bold text-terracotta/30 absolute top-4 right-4">04</span>
+                            <h3 class="font-serif text-xl text-cream font-medium">Омоложение</h3>
+                            <p class="text-stone-300 text-xs leading-relaxed">
+                                Стимуляция обновления тканей и выработки собственных антиоксидантов.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl flex flex-col md:flex-row items-center justify-between gap-6 border-l-4 border-l-terracotta">
+                        <div class="space-y-1 text-center md:text-left">
+                            <h4 class="font-serif text-xl text-cream">Только стерильные медицинские пиявки</h4>
+                            <p class="text-stone-400 text-xs">Строго одноразовое применение с аккредитованных биофабрик</p>
+                        </div>
+                        <button onclick="goToLayer(3)" class="bg-terracotta hover:bg-terracotta-dark text-white text-xs font-semibold uppercase tracking-wider px-6 py-3 rounded-md transition-colors whitespace-nowrap">
+                            Опыт и Квалификация
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LAYER 3: CLINICAL EXPERIENCE & STERILITY -->
+            <section id="layer-3" class="portal-layer absolute inset-0 w-full h-full flex flex-col justify-start sm:justify-center items-center pt-24 sm:pt-20 pb-14 px-4 sm:px-12 md:px-16 z-0 opacity-0 pointer-events-none" style="transform: translateZ(-1800px);">
+                <div class="absolute inset-0 -z-10 bg-obsidian">
+                    <img src="layer-4-clinic.jpg" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=2000&q=80';" 
+                         alt="Клинический Опыт" 
+                         class="w-full h-full object-cover filter brightness-[0.35] contrast-[1.05]">
+                    <div class="absolute inset-0 vignette-overlay"></div>
+                </div>
+
+                <div class="max-w-5xl w-full mx-auto space-y-5 sm:space-y-8">
+                    <div class="text-center space-y-3">
+                        <span class="text-amber text-xs uppercase tracking-[0.3em] font-semibold">Раздел 04</span>
+                        <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl text-cream font-light">
+                            Медицинская База & Безопасность
+                        </h2>
+                        <p class="text-stone-300 max-w-xl mx-auto text-sm sm:text-base font-light">
+                            Фундаментальное профильное образование и строгое соблюдение санитарных стандартов
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="glass-card p-6 rounded-xl text-center space-y-3">
+                            <div class="text-3xl font-serif text-amber font-bold">Диплом</div>
+                            <div class="text-cream font-medium text-sm">Сестринское Дело</div>
+                            <p class="text-stone-400 text-xs">Фундаментальная медицинская подготовка и практический опыт</p>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-xl text-center space-y-3">
+                            <div class="text-3xl font-serif text-amber font-bold">100%</div>
+                            <div class="text-cream font-medium text-sm">Стерильный Инструментарий</div>
+                            <p class="text-stone-400 text-xs">Использование индивидуальных одноразовых пакетов и материалов</p>
+                        </div>
+
+                        <div class="glass-card p-6 rounded-xl text-center space-y-3">
+                            <div class="text-3xl font-serif text-amber font-bold">Контроль</div>
+                            <div class="text-cream font-medium text-sm">Сопровождение 24/7</div>
+                            <p class="text-stone-400 text-xs">Внимательный мониторинг динамики состояния на всех этапах курса</p>
+                        </div>
+                    </div>
+
+                    <!-- Quote Block -->
+                    <div class="glass-card p-8 rounded-xl text-center max-w-3xl mx-auto space-y-4">
+                        <i class="fa-solid fa-quote-left text-amber/40 text-3xl"></i>
+                        <p class="font-serif text-lg md:text-xl text-stone-200 italic">
+                            «Здоровье — это результат ежедневного гармоничного взаимодействия всех систем организма. Моя цель — выявить причины дисбаланса и безопасно их устранить.»
+                        </p>
+                        <div class="text-amber text-xs font-semibold uppercase tracking-widest">— Лариса Александровна Воскобоева</div>
+                    </div>
+
+                    <div class="flex justify-center pt-2">
+                        <button onclick="goToLayer(4)" class="bg-amber hover:bg-amber/90 text-obsidian font-semibold text-xs uppercase tracking-wider px-8 py-3.5 rounded-md transition-colors">
+                            Посмотреть программы и цены
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LAYER 4: PROGRAMS & CONTACTS -->
+            <section id="layer-4" class="portal-layer absolute inset-0 w-full h-full flex flex-col justify-between pt-24 sm:pt-20 pb-10 px-4 sm:px-12 md:px-16 z-0 opacity-0 pointer-events-none" style="transform: translateZ(-2400px);">
+                <div class="absolute inset-0 -z-10 bg-obsidian">
+                    <img src="layer-5-final.jpg" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=2000&q=80';" 
+                         alt="Программы и Запись" 
+                         class="w-full h-full object-cover filter brightness-[0.35] contrast-[1.1]">
+                    <div class="absolute inset-0 vignette-overlay"></div>
+                </div>
+
+                <div class="max-w-6xl w-full mx-auto my-auto space-y-5 sm:space-y-8">
+                    <div class="text-center space-y-2">
+                        <span class="text-amber text-xs uppercase tracking-[0.3em] font-semibold">Раздел 05</span>
+                        <h2 class="font-serif text-3xl sm:text-5xl text-cream font-light">
+                            Программы & Запись на Приём
+                        </h2>
+                    </div>
+
+                    <!-- Pricing Cards Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Card 1 -->
+                        <div class="glass-card p-6 rounded-xl flex flex-col justify-between space-y-6 hover:border-amber/40 transition-colors">
+                            <div class="space-y-4">
+                                <h3 class="font-serif text-2xl text-cream">Консультация Нутрициолога</h3>
+                                <div class="text-3xl font-serif text-amber font-bold">5 000 ₽</div>
+                                <ul class="space-y-2 text-xs text-stone-300">
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber"></i> Разбор жалоб и образа жизни</li>
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber"></i> Расшифровка ключевых анализов</li>
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber"></i> Персональный план питания</li>
+                                </ul>
+                            </div>
+                            <button onclick="openBookingModal('Консультация Нутрициолога')" class="w-full py-3 rounded-md bg-stone-800 hover:bg-stone-700 text-cream text-xs font-semibold uppercase tracking-wider transition-colors">
+                                Записаться
+                            </button>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="glass-card p-6 rounded-xl flex flex-col justify-between space-y-6 border-2 border-amber relative">
+                            <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber text-obsidian text-[10px] uppercase font-bold px-3 py-0.5 rounded-full">Рекомендуемый курс</span>
+                            <div class="space-y-4">
+                                <h3 class="font-serif text-2xl text-cream">Комплексное Оздоровление</h3>
+                                <div class="text-3xl font-serif text-amber font-bold">18 000 ₽</div>
+                                <ul class="space-y-2 text-xs text-stone-300">
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber"></i> Сопровождение нутрициолога 1 мес</li>
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber"></i> Схема нутрицевтиков и меню</li>
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber"></i> Поддержка и ответы на вопросы</li>
+                                </ul>
+                            </div>
+                            <button onclick="openBookingModal('Комплексное Оздоровление')" class="w-full py-3 rounded-md bg-amber hover:bg-amber/90 text-obsidian text-xs font-bold uppercase tracking-wider transition-colors">
+                                Выбрать курс
+                            </button>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="glass-card p-6 rounded-xl flex flex-col justify-between space-y-6 hover:border-amber/40 transition-colors">
+                            <div class="space-y-4">
+                                <h3 class="font-serif text-2xl text-cream">Сеанс Гирудотерапии</h3>
+                                <div class="text-3xl font-serif text-amber font-bold">3 000 ₽</div>
+                                <ul class="space-y-2 text-xs text-stone-300">
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber"></i> Постановка медицинской пиявки</li>
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber"></i> Стерильный одноразовый уход</li>
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber"></i> Рекомендации после сеанса</li>
+                                </ul>
+                            </div>
+                            <button onclick="openBookingModal('Сеанс Гирудотерапии')" class="w-full py-3 rounded-md bg-stone-800 hover:bg-stone-700 text-cream text-xs font-semibold uppercase tracking-wider transition-colors">
+                                Записаться
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Messenger Links -->
+                    <div class="flex flex-wrap justify-center gap-4 pt-2">
+                        <a href="https://t.me" target="_blank" class="glass-card px-5 py-3 rounded-lg flex items-center gap-3 text-stone-300 hover:text-white hover:border-amber transition-all">
+                            <i class="fa-brands fa-telegram text-amber text-lg"></i>
+                            <span class="text-xs font-medium">Telegram</span>
+                        </a>
+                        <a href="https://whatsapp.com" target="_blank" class="glass-card px-5 py-3 rounded-lg flex items-center gap-3 text-stone-300 hover:text-white hover:border-amber transition-all">
+                            <i class="fa-brands fa-whatsapp text-emerald-400 text-lg"></i>
+                            <span class="text-xs font-medium">WhatsApp</span>
+                        </a>
+                        <a href="tel:+79000000000" class="glass-card px-5 py-3 rounded-lg flex items-center gap-3 text-stone-300 hover:text-white hover:border-amber transition-all">
+                            <i class="fa-solid fa-phone text-amber text-sm"></i>
+                            <span class="text-xs font-medium">+7 (900) 000-00-00</span>
+                        </a>
+                    </div>
+                </div>
+
+                <footer class="w-full text-center text-stone-500 text-xs py-4 border-t border-stone-800/60">
+                    © 2026 Лариса Александровна Воскобоева. Все права защищены. Имеются противопоказания, необходима консультация специалиста.
+                </footer>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- BOOKING MODAL -->
+    <div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card-light max-w-lg w-full p-6 md:p-8 rounded-2xl shadow-2xl relative text-stone-900 border border-stone-300">
+            <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-stone-500 hover:text-stone-900 text-xl focus:outline-none">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 class="font-serif text-3xl font-semibold text-[#1E332A] mb-2">Запись на Приём</h3>
+            <p class="text-xs text-stone-600 mb-6">Оставьте контакты, и мы свяжемся с вами в течение 15 минут для согласования времени.</p>
+
+            <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-stone-700 mb-1">Ваше Имя</label>
+                    <input type="text" required placeholder="Елена" class="w-full px-4 py-2.5 rounded-lg bg-white border border-stone-300 text-stone-900 text-sm focus:outline-none focus:border-[#1E332A]">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-stone-700 mb-1">Телефон</label>
+                    <input type="tel" required placeholder="+7 (999) 000-00-00" class="w-full px-4 py-2.5 rounded-lg bg-white border border-stone-300 text-stone-900 text-sm focus:outline-none focus:border-[#1E332A]">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-stone-700 mb-1">Программа / Услуга</label>
+                    <select id="modal-service-select" class="w-full px-4 py-2.5 rounded-lg bg-white border border-stone-300 text-stone-900 text-sm focus:outline-none focus:border-[#1E332A]">
+                        <option value="Консультация Нутрициолога">Консультация Нутрициолога</option>
+                        <option value="Комплексное Оздоровление">Комплексное Оздоровление</option>
+                        <option value="Сеанс Гирудотерапии">Сеанс Гирудотерапии</option>
+                        <option value="Вопрос специалистa">Вопрос специалисту</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-lg bg-[#1E332A] hover:bg-[#13221B] text-white font-medium text-sm transition-colors shadow-md mt-2">
+                    Отправить Заявку
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-[#1E332A] text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-3 opacity-0 pointer-events-none transition-all duration-300 text-sm">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span>Заявка успешно отправлена! Мы свяжемся с вами.</span>
+    </div>
+
+    <!-- JAVASCRIPT: 3D Z-AXIS ZOOM ENGINE -->
+    <script>
+        let currentLayerIndex = 0;
+        const totalLayers = 5;
+        const layerDepthStep = 600; // Z-axis pixel offset between layers
+        let isTransitioning = false;
+
+        const stage = document.getElementById('stage');
+        const layers = Array.from(document.querySelectorAll('.portal-layer'));
+        const layerCounter = document.getElementById('layer-counter');
+
+        function goToLayer(targetIndex) {
+            if (targetIndex < 0 || targetIndex >= totalLayers || isTransitioning) return;
+            
+            isTransitioning = true;
+            currentLayerIndex = targetIndex;
+
+            // Translate 3D stage forward/backward
+            const targetZ = currentLayerIndex * layerDepthStep;
+            stage.style.transform = `translateZ(${targetZ}px)`;
+
+            // Transform each layer with dynamic Z depth & focus filters
+            layers.forEach((layer, idx) => {
+                const layerZ = -idx * layerDepthStep;
+                layer.style.transform = `translateZ(${layerZ}px)`;
+
+                if (idx === currentLayerIndex) {
+                    layer.style.opacity = '1';
+                    layer.style.pointerEvents = 'auto';
+                    layer.style.filter = 'blur(0px)';
+                } else if (idx < currentLayerIndex) {
+                    layer.style.opacity = '0';
+                    layer.style.pointerEvents = 'none';
+                    layer.style.filter = 'blur(10px)';
+                } else {
+                    layer.style.opacity = '0';
+                    layer.style.pointerEvents = 'none';
+                    layer.style.filter = 'blur(6px)';
+                }
+            });
+
+            // Update Counter
+            layerCounter.innerText = `0${currentLayerIndex + 1}/05`;
+
+            // Update Right Dot Indicators
+            for (let i = 0; i < totalLayers; i++) {
+                const dot = document.getElementById(`dot-${i}`);
+                if (!dot) continue;
+                const dotCircle = dot.querySelector('span:nth-child(2)');
+                const dotText = dot.querySelector('span:nth-child(1)');
+
+                if (i === currentLayerIndex) {
+                    dotCircle.className = 'w-2.5 h-2.5 rounded-full bg-amber ring-4 ring-amber/20 transition-all duration-300';
+                    dotText.className = 'text-xs font-mono opacity-100 text-amber transition-opacity';
+                } else {
+                    dotCircle.className = 'w-2 h-2 rounded-full bg-stone-600 transition-all duration-300';
+                    dotText.className = 'text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity text-stone-400';
+                }
+            }
+
+            // Update Header Bar Indicators & Styling
+            for (let i = 0; i < totalLayers; i++) {
+                const indicator = document.getElementById(`nav-indicator-${i}`);
+                const btn = document.getElementById(`nav-btn-${i}`);
+                if (indicator && btn) {
+                    if (i === currentLayerIndex) {
+                        indicator.classList.remove('w-0');
+                        indicator.classList.add('w-full');
+                        btn.classList.add('font-medium', 'text-[#1E332A]');
+                    } else {
+                        indicator.classList.remove('w-full');
+                        indicator.classList.add('w-0');
+                        btn.classList.remove('font-medium');
+                    }
+                }
+            }
+
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 800);
+        }
+
+        // Mouse Wheel Scroll Listener
+        window.addEventListener('wheel', (e) => {
+            if (isTransitioning) return;
+            if (e.deltaY > 30) {
+                if (currentLayerIndex < totalLayers - 1) goToLayer(currentLayerIndex + 1);
+            } else if (e.deltaY < -30) {
+                if (currentLayerIndex > 0) goToLayer(currentLayerIndex - 1);
+            }
+        }, { passive: true });
+
+        // Touch Swipe Listeners
+        let touchStartY = 0;
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        window.addEventListener('touchend', (e) => {
+            if (isTransitioning) return;
+            const activeLayer = layers[currentLayerIndex];
+            const touchEndY = e.changedTouches[0].clientY;
+            const diff = touchStartY - touchEndY;
+            if (!activeLayer) return;
+            const atBottom = activeLayer.scrollTop + activeLayer.clientHeight >= activeLayer.scrollHeight - 4;
+            const atTop = activeLayer.scrollTop <= 4;
+            if (diff > 80 && atBottom && currentLayerIndex < totalLayers - 1) {
+                goToLayer(currentLayerIndex + 1);
+            } else if (diff < -80 && atTop && currentLayerIndex > 0) {
+                goToLayer(currentLayerIndex - 1);
+            }
+        }, { passive: true });
+
+        // Keyboard Arrow Key Listener
+        window.addEventListener('keydown', (e) => {
+            if (isTransitioning) return;
+            if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === 'ArrowRight') {
+                if (currentLayerIndex < totalLayers - 1) goToLayer(currentLayerIndex + 1);
+            } else if (e.key === 'ArrowUp' || e.key === 'PageUp' || e.key === 'ArrowLeft') {
+                if (currentLayerIndex > 0) goToLayer(currentLayerIndex - 1);
+            }
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Modal Functions
+        function openBookingModal(serviceName = '') {
+            const modal = document.getElementById('booking-modal');
+            const select = document.getElementById('modal-service-select');
+            if (serviceName && select) {
+                select.value = serviceName;
+            }
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100', 'pointer-events-auto');
+        }
+
+        function closeBookingModal() {
+            const modal = document.getElementById('booking-modal');
+            modal.classList.remove('opacity-100', 'pointer-events-auto');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            closeBookingModal();
+            
+            const toast = document.getElementById('toast');
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100', 'pointer-events-auto');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'pointer-events-auto');
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 4000);
+        }
+
+        // Initialize Stage
+        window.onload = function() {
+            goToLayer(0);
+        };
+    </script>
+</body>
+</html>
